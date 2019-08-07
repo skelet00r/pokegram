@@ -1,0 +1,19 @@
+version: '3'
+services:
+  pokegram:
+    build: .
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/pokegram
+      - INSTA_USER=${INSTA_USER}
+      - INSTA_PASS=${INSTA_PASS}
+    volumes:
+      - ./src:/usr/pokegram/src
+    ports:
+      - 4000:4000
+    command: npm run start:watch
+  mongo:
+    image: mongo:4
+    volumes:
+      - ./tmp:/data
+    ports:
+      - 27017:27017
